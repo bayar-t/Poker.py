@@ -31,6 +31,37 @@ class Deck(object):
     def drawC(self):
         return self.cards.pop()
 
+    def flush(arg1):
+        if (len(set(arg1))) != 5:
+            return ("This is not a valid poker hand")
+        handsuits = set([i[0] for i in arg1])
+        if len(handsuits) != 1:
+            return False
+        handranks = [i[1] for i in arg1]
+        #    handranks = transform(handranks)
+        sortedranks = sorted(handranks)
+        if len(handsuits) == 1:
+            if (sortedranks[4]-sortedranks[0]) == 4 or sortedranks == [1, 2, 3, 4, 5] or sortedranks == [1, 10, 11, 12, 13]:
+                return False
+            else:
+                return True
+        else:
+            return False
+
+    def straight(arg1):
+        if (len(set(arg1))) != 5:
+            return ("This is not a valid poker hand")
+            handsuits = set([i[0] for i in arg1])
+            if len(handsuits) == 1:
+                return False
+                handranks = [i[1] for i in arg1]
+    #    handranks = transform(handranks)
+        sortedranks = sorted(handranks)
+        if 1 == sortedranks[0]:
+            return sortedranks == [1, 2, 3, 4, 5] or sortedranks == [1, 10, 11, 12, 13]
+        else:
+            return (sortedranks[4]-sortedranks[0] == 4) and len(set(sortedranks)) == 5
+
 
 class Player(object):
     def __init__(self, name):
@@ -54,9 +85,14 @@ deck = Deck()
 deck.shuffle()
 #deck.show()
 bob = Player("Bob")
-bob.draw(deck).draw(deck)
+bob.draw(deck).draw(deck).draw(deck).draw(deck).draw(deck)
 bob.showHand()
-
-
+#card = Card("Clubs", 6)
+#card.show()
+suits = ["Spades", "Clubs", "Diamonds", "Hearts"]
+ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+deck = {(i,j) for i in suits for j in ranks}
+num_of_flushes = 0
+num_of_straights = 0
 #card = deck.drawC()
 #card.show()
